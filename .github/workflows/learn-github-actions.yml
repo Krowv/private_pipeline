@@ -1,27 +1,28 @@
 name: analyse-phpStan-on-push
 run-name: ${{ github.actor }} is running phpStan analyse on push
-on: [push]
+on:
+  push:
+    branches:
+      - master  # Adjust the branch name if needed
 jobs:
-  phpStan-analyse:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Manual Workflow Approval
-        uses: trstringer/manual-approval@v1.9.0
-      - name: test
-        run: vendor/bin/phpstan analyse -c vendor/phpstan/phpstan/conf/phpstan.neon
-        continue-on-error: false
-      - name: build
-        run: echo "Build App Image"
-      - uses: Krowv/manual-approval@master
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          secret: ${{ github.TOKEN }}
-          approvers: user1,user2,org-team1
-          minimum-approvals: 1
-          issue-title: "Deploying v1.3.5 to prod from staging"
-          issue-body: "Please approve or deny the deployment of version v1.3.5."
-          exclude-workflow-initiator-as-approver: false
-          additional-approved-words: ''
-          additional-denied-words: ''
-      - name : deploy
-        run: echo "Deploy App Image"
+          php-version: 8.0
+      - uses: php-actions/composer@v6
+      - name: test  phpstan
+        run: vendor/bin/phpstan analyse -c vendor/phpstan/phpstan/conf/phpstan.neon
+  build:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Build app image"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploy project"
