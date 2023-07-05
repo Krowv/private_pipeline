@@ -5,4 +5,4 @@ jobs:
   phpStanAnalyse:
     runs-on: ubuntu-latest
     steps:
-      - run: vendor/bin/phpstan analyse -c vendor/phpstan/phpstan/conf/phpstan.neon
+      - run: ../../vendor/bin/phpstan analyse -c ../../vendor/phpstan/phpstan/conf/phpstan.neon
