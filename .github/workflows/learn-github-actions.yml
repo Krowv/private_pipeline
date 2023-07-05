@@ -5,13 +5,15 @@ jobs:
   phpStan-analyse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: phpStan analyse
+      - uses: actions/checkout@v3
+      - name: composer
+        run: composer require phpstan/phpstan
+      - name: php install
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
           extensions: intl, zip
           coverage: none
-          tools: phpStan
+          tools: phpstan
       - name: phpStan analyse
         run: vendor/bin/phpstan analyse -c vendor/phpstan/phpstan/conf/phpstan.neon
