@@ -1,5 +1,7 @@
 name: analyse-phpStan-on-push
 run-name: ${{ github.actor }} is running phpStan analyse on push
+env :
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 on:
   push:
     branches:
@@ -19,8 +21,14 @@ jobs:
   build:
     needs: tests
     runs-on: ubuntu-latest
+    #on push le dockerfile sur dockerhub
     steps:
-      - run: echo "Build app image"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/simple-app:latest
+      - name: Push the Docker image to the registry
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/simple-app:latest
   deploy:
     needs: build
     runs-on: ubuntu-latest
