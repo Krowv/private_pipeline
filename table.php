@@ -17,7 +17,7 @@ $result = $conn->query($sql);
 
         <tbody>
  <?php
-if ($result instanceof mysqli_result && $result->num_rows > 0) {
+if ( $result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
     	?>
