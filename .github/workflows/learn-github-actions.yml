@@ -11,7 +11,7 @@ jobs:
       - name: php install
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.0'
           tools: phpstan
       - name: phpStan analyse
         run: vendor/bin/phpstan analyse -c vendor/phpstan/phpstan/conf/phpstan.neon
