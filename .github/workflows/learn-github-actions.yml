@@ -6,12 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Manual Workflow Approval
+        uses: trstringer/manual-approval@v1.9.0
       - name: test
         run: vendor/bin/phpstan analyse -c vendor/phpstan/phpstan/conf/phpstan.neon
         continue-on-error: false
       - name: build
         run: echo "Build App Image"
-      - uses: krowv/manual-approval@master
+      - uses: Krowv/manual-approval@master
         with:
           secret: ${{ github.TOKEN }}
           approvers: user1,user2,org-team1
