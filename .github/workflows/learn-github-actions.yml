@@ -1,11 +1,17 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
+name: analyse-phpStan-on-push
+run-name: ${{ github.actor }} is running phpStan analyse on push
 on: [push]
 jobs:
+  phpStan-analyse:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: composer install
-      - name: Run phpstan
-        run: composer phpstan
+      - name: phpStan analyse
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: intl, zip
+          coverage: none
+          tools: phpStan
+      - name: phpStan analyse
+        run: vendor/bin/phpstan analyse -c vendor/phpstan/phpstan/conf/phpstan.neon
