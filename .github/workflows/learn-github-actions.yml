@@ -1,0 +1,16 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  phpStanAnalyse:
+    name: PHPStan analyse
+    runs-on: ubuntu-latest
+    steps:
+      - name: PHPStan analyse
+        run: vendor/bin/phpstan analyse -c vendor/phpstan/phpstan/conf/phpstan.neon
