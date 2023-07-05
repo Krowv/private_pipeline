@@ -11,7 +11,7 @@ jobs:
         continue-on-error: false
       - name: build
         run: echo "Build App Image"
-      - uses: private_pipeline/manual-approval@v1
+      - uses: krowv/manual-approval@master
         with:
           secret: ${{ github.TOKEN }}
           approvers: user1,user2,org-team1
