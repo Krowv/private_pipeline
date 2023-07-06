@@ -63,4 +63,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: SSH connexion
-        run: echo "Bonjour"
+        uses: webfactory/ssh-agent@v0.5.0
