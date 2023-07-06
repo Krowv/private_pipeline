@@ -63,11 +63,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Connexion SSH
-        uses: appleboy/ssh-action@master
+        uses: webfactory/ssh-agent@v0.5.0
         with:
-          host: 162.19.74.216
-          username: thomas
-          key: ${{ secrets.SECRET_SSH }}
-          port: 22
-          script: |
-            docker pull krowv/simple-app:latest
+          ssh-private-key: ${{ secrets.SECRET_SSH }}
+        - name: Deploy
+          run: |
+            ssh -o StrictHostKeyChecking=no -p 22 thomas@162.19.74.216 'docker pull krowv/simple-app:master'
