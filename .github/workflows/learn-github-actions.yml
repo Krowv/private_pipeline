@@ -61,12 +61,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Connexion SSH
-        uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.SECRET_SSH }}
-        - name: Deploy
-          run: |
-            ssh -o StrictHostKeyChecking=no -p 22 thomas@162.19.74.216 'docker pull krowv/simple-app:master'
+      - name: SSH connexion
+        run: echo "Bonjour"
