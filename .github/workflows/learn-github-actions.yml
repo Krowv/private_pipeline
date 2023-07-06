@@ -56,13 +56,14 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      - name: display something
-        run: echo ${{ secrets.SECRET_SSH }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: SSH connexion
+      - name: SSH setup
         uses: webfactory/ssh-agent@v0.5.0
         with:
           ssh-private-key: ${{ secrets.SECRET_SSH }}
+
+      - name: SSH connexion + commands
+        run: echo "Bonjour"
