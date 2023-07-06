@@ -66,4 +66,5 @@ jobs:
           ssh-private-key: ${{ secrets.SECRET_SSH }}
 
       - name: SSH connexion + commands
-        run: echo "Bonjour"
+        run: |
+          ssh -o StrictHostKeyChecking=no -p 22 thomas@$162.19.74.216 "docker pull krowv/simple-app:master"
