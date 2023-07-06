@@ -1,7 +1,7 @@
 <script type="text/javascript">
-	if (localStorage.getItem("language")=="Danish"){
+	if (localStorage.getItem("language")=="French"){
 		console.log("too")
-		convertDanish();
+		convertFrench();
 	}else{
 		console.log("toos")
 	}
