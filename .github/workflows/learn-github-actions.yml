@@ -60,4 +60,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Deploy project"
+      - name: Connexion SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: 162.19.74.216
+          username: thomas
+          key: ${{ secrets.SECRET_SSH }}
+          port: 22
+          script: |
+            docker pull krowv/simple-app:latest
