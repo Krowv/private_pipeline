@@ -24,7 +24,7 @@
     $(document).ready(function(){
       $('.slider').slider({
       			height:500,
-      			indicators:false
+      			indicators:false;
       		});
     });
     $(".button-collapse").sideNav();
